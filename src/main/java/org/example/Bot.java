@@ -1,5 +1,6 @@
 package org.example;
 
+import org.glassfish.hk2.utilities.reflection.MethodWrapper;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -14,26 +15,14 @@ public class Bot extends TelegramLongPollingBot {
 
     public void onUpdateReceived(Update update) {
 
-        String message = update.getMessage().getText();
+        MessageChecker msgChecker = new MessageChecker(update.getMessage());
 
-        String response = messageTextChecker(message);
+        String response = msgChecker.checkMessageText();
 
-
-
-
-    }
-
-    public String messageTextChecker(String message) {
-
-        if (message.equals(Comands.START.getComand())){ return "Привет, я тупо бот. Нихера не умеюю Вот!"; }
-
-        if (message.equals(Comands.HELP.getComand())) { return "Я хз как я тут работю, постарайся меня не сломать и все!"; }
-
-        else {
-            return "Не понел";
-        }
+        sendMsg(update.getMessage().getChatId(), response);
 
     }
+
 
     public void setBotToken(String botToken) {
         this.botToken = botToken;
@@ -49,7 +38,6 @@ public class Bot extends TelegramLongPollingBot {
 
     public void sendMsg(Long chatId, String text){
         SendMessage sendMessage = new SendMessage();
-        sendMessage.enableMarkdown(true);
         sendMessage.setChatId(chatId);
         sendMessage.setText(text);
 
