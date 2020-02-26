@@ -10,6 +10,7 @@ public class MessageChecker {
 
     public MessageChecker(Message msg){
         this.msg = msg;
+        System.out.println(msg.getText());
     }
 
     public String checkMessageText() {
@@ -26,7 +27,7 @@ public class MessageChecker {
 
     private String comandCheck(String msg){
         if (msg.equals(Comands.START.getComand())){ return "Привет, я тупо бот. Нихера не умеюю Вот! " +
-                "Могу бахнуть тебе рандомное число. Для этого напиши <b>/random</b> и всё!"; }
+                "Могу бахнуть тебе рандомное число. Для этого напиши [/random] и всё!"; }
 
         if (msg.equals(Comands.HELP.getComand())) { return "Я хз как я тут работю, постарайся меня не сломать и все!"; }
 
