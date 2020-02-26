@@ -10,8 +10,8 @@ import java.util.logging.Level;
 
 public class Bot extends TelegramLongPollingBot {
 
-    private String botToken = "995771556:AAEBwtZ4LCh-x0UaroZjwIKexJuPtLjMWxA";
-    private String botUserName = "@vladichtest_bot";
+    private String botToken = System.getenv("token");
+    private String botUserName = "username";
 
     public void onUpdateReceived(Update update) {
 
